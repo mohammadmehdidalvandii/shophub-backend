@@ -6,7 +6,8 @@ interface MyTokenPayload extends JwtPayload{
     data:{id:string , [key:string]:any}
 }
 
-const securityCode = process.env.SRC_CODE 
+const securityCode = process.env.SRC_CODE || "dasnkklasnkldnjbvnklanskldipqwdionwqkldnklai92e9asnsklsaniodioa"
+console.log(securityCode)
 if(!securityCode){
     throw new Error('Security code is not found ');
 };
