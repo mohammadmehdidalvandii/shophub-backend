@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-
+import { connectToDB } from "./config/db";
 const app = express();
 
 dotenv.config();
@@ -17,6 +17,9 @@ app.use(express.urlencoded({extended:true}));
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
+
+// Connect to DB
+connectToDB()
 
 app.get('/',(req , res)=>{
         res.send('Hello world')
