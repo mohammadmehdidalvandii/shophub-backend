@@ -6,6 +6,7 @@ export const authController = {
         try{
             const data = req.body;
             const newUser = await authService.register(data);
+
             res.status(201).json({
                 message:"Created User successfully",
                 statusCode:201,

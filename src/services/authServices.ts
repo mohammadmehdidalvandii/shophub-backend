@@ -10,19 +10,20 @@ export const authService = {
     if(existing) throw new Error("User exist already");
 
     // check Role User
-
+    const users = await UserModel.find({});
+    const useRole = users.length > 0 ? "CUSTOMER":"ADMIN";
     // hash-password
     const hashPassword = await hashedPassword(password);
-    // Access-token
     const user =  await UserModel.create({
         firstName,
         lastName,
         email,
         password:hashPassword,
-        role,
+        role:useRole,
         phone,
     });
 
     return user
  },
+ 
 }
