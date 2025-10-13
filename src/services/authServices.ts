@@ -1,6 +1,6 @@
 import UserModel from "../models/Users";
 import { LoginProps, RegisterProps } from "../types/auth";
-import {generateAccessToken , generateRefreshToken , hashedPassword , comparePassword} from '../utils/auth'
+import {generateAccessToken , generateRefreshToken , hashedPassword , comparePassword, verifyToken} from '../utils/auth'
 
 export const authService = {
  async register(data:RegisterProps){
@@ -54,6 +54,15 @@ export const authService = {
     });
 
     return {accessToken , refreshToken}
-
  },
+ async refreshToken(refreshToken:string){
+    try{
+        const payload:any = verifyToken(refreshToken);
+        const newAccessToken = generateAccessToken({_id:payload._id});
+
+        return newAccessToken
+    }catch(error:any){
+        throw new Error(`Invalid RefreshToken => ${error}`)
+    }
+ }
 }

@@ -47,5 +47,28 @@ export const authController = {
                 statusCode:500
             })
         }
+    },
+    async refreshToken(req:req , res:res){
+        try{
+            const token  = req.cookies.refreshToken;
+            if(!token){
+                return res.status(400).json({
+                    message:"not found refreshToken",
+                    statusCode:400
+                })
+            };
+            const accessToken = await authService.refreshToken(token);
+            res.status(200).json({
+                message:"Updated Refresh token successfully",
+                statusCode:200,
+                data:accessToken
+            })
+        }catch(error:any){
+            res.status(500).json({
+                message:"Server Internal error RefreshToken",
+                statusCode:500,
+                error:error.message
+            })
+        }
     }
 }
