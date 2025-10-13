@@ -6,3 +6,8 @@ export  interface RegisterProps {
     role:string,
     phone:string,
 }
+
+export interface LoginProps{
+    email:string,
+    password:string,
+}
