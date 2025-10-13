@@ -1,5 +1,5 @@
 import UserModel from "../models/Users";
-import { RegisterProps } from "../types/auth";
+import { LoginProps, RegisterProps } from "../types/auth";
 import {generateAccessToken , generateRefreshToken , hashedPassword , comparePassword} from '../utils/auth'
 
 export const authService = {
@@ -29,5 +29,31 @@ export const authService = {
 
     return user
  },
- 
+ async login(data:LoginProps){
+    const {email , password} = data;
+    if(!email || !password){
+        throw new Error('Email and Password are required');
+    }
+    // find user 
+    const user = await UserModel.findOne({email});
+    if(!user) throw new Error('User is not found');
+
+    // compare password
+    const isPasswordValid = await comparePassword(password , user.password);
+    if(!isPasswordValid) throw new Error("Password or Email Not valid");
+
+    const accessToken = generateAccessToken({
+        _id:user._id,
+        firstName:user.firstName,
+        lastName:user.lastName,
+        role:user.role,
+        phone:user.phone,
+    });
+    const refreshToken = generateRefreshToken({
+        _id:user.id,
+    });
+
+    return {accessToken , refreshToken}
+
+ },
 }

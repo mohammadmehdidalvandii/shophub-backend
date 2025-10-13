@@ -20,4 +20,32 @@ export const authController = {
             })
         }
     },
+    async login(req:req , res:res){
+        try{
+            const {email , password} = req.body;
+            const {accessToken , refreshToken} = await authService.login({email , password});
+
+            res.cookie('refreshToken',refreshToken,{
+                httpOnly:true,
+                sameSite:'none',
+                secure:true,
+                path:"/",
+                maxAge: 7 * 24 *  60 * 60 * 1000 ,
+            });
+
+            res.status(200).json({
+                message:"Login Successfully",
+                statusCode:200,
+                data:{accessToken}
+            })
+            
+
+            } catch(error:any){
+            res.status(500).json({
+                message:"Sever Internal error",
+                error:error.message,
+                statusCode:500
+            })
+        }
+    }
 }
