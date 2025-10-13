@@ -5,6 +5,10 @@ import {generateAccessToken , generateRefreshToken , hashedPassword , comparePas
 export const authService = {
  async register(data:RegisterProps){
     const {firstName,lastName,email,password,role,phone} = data;
+    // validation
+    if(!firstName || !lastName || !email || !password || !password || !phone){
+        throw new Error("Missing required Fields")
+    }
     // existing user 
     const existing = await UserModel.findOne({email:email});
     if(existing) throw new Error("User exist already");
