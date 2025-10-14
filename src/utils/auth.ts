@@ -32,7 +32,7 @@ const generateRefreshToken = (data:Record<string ,any>)=>{
 
 const verifyToken = (token:string)=>{
     try{
-        const payload  = verify(token , securityCode) as MyTokenPayload;
+        const payload  = verify(token , securityCode) as MyTokenPayload ;
         return payload
     } catch(error){
         console.log("Invalid Verify Token =>" , error)

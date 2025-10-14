@@ -1,4 +1,6 @@
 import { Request , Response , NextFunction } from "express";
-export type req = Request;
+export interface req extends Request{
+    user?:string | JwtPayload,
+}
 export type res = Response;
 export type next = NextFunction;

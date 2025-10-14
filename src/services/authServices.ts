@@ -64,5 +64,10 @@ export const authService = {
     }catch(error:any){
         throw new Error(`Invalid RefreshToken => ${error}`)
     }
- }
+ },
+ async getProfile(id:string){
+    console.log("id =>" , id)
+    const profile = await UserModel.findOne({_id:id});
+    return profile
+ },
 }

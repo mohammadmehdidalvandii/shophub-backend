@@ -70,5 +70,23 @@ export const authController = {
                 error:error.message
             })
         }
-    }
+    },
+    async profile(req:req , res:res){
+        try{
+            const user = req.user;
+            console.log("user =>" , user._id)
+            const profile = await authService.getProfile(user._id) ;
+            res.status(200).json({
+                message:"Get profile Successfully",
+                statusCode:200,
+                data:profile,
+            })
+        }catch(error:any){
+            res.status(500).json({
+                message:"Failed get profile",
+                statusCode:500,
+                error:error.message
+            })
+        }
+    },
 }
