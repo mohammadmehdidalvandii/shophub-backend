@@ -8,6 +8,5 @@ router.post('/register', authController.register);
 router.post('/login', authController.login);
 router.post('/refresh-token', authController.refreshToken);
 router.get('/profile', authenticateToken ,authController.profile)
-router.get('/users', authController.getAllUsers)
 
 export default router
