@@ -4,5 +4,9 @@ export const userServices = {
     async getAllUsers (){
         const users = await UserModel.find().sort({createdAt:-1}).select('-password');
         return users
+    },
+    async getUserById(id:string){
+        const user = await UserModel.findOne({_id:id}).select('-password');
+        return user;
     }
 }
