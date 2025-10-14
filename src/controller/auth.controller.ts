@@ -74,7 +74,6 @@ export const authController = {
     async profile(req:req , res:res){
         try{
             const user = req.user;
-            console.log("user =>" , user._id)
             const profile = await authService.getProfile(user._id) ;
             res.status(200).json({
                 message:"Get profile Successfully",
@@ -89,4 +88,9 @@ export const authController = {
             })
         }
     },
+    async logout(req:req , res:res){
+        // need addressWeb
+        res.clearCookie('refreshToken');
+        res.json({message:"Logged out  successfully"})
+    }
 }

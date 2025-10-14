@@ -66,7 +66,6 @@ export const authService = {
     }
  },
  async getProfile(id:string){
-    console.log("id =>" , id)
     const profile = await UserModel.findOne({_id:id});
     return profile
  },
