@@ -59,9 +59,7 @@ export const userController = {
                         updateData[key] = req.body[key]
                     }
                 }
-                console.log("updateData",updateData)
                 const user = await userServices.updateUser(id , updateData);
-                console.log("user=<", user)
                 res.status(200).json({
                     message:"User updated successfully ✅",
                     statusCode:200,
@@ -75,5 +73,28 @@ export const userController = {
                 error:error.message,
             })
         }
+    },
+    async delete(req:req,res:res){
+        try{
+            const {id} = req.params;
+        if(!id){
+            return res.status(400).json({
+                message:"id not found ",
+                statusCode:400,
+            })
+        }
+            const deleteUser = await userServices.deleteUser(id);
+            res.status(200).json({
+                message:'delete user successfully',
+                statusCode:200,
+                data:deleteUser,
+            })
+        }catch(error:any){
+            res.status(500).json({
+                message:"Server Internal Delete user ",
+                statusCode:500,
+                error:error.message
+            })
+        } 
     }
 }

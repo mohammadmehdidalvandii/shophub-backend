@@ -14,5 +14,9 @@ import UserModel from '../models/Users';
             if(!userId) throw new Error('User not found')
             const user = await UserModel.findOneAndUpdate({_id:id},data,{new:true}).select('-password');
             return user
+        },
+        async deleteUser(id:string){
+            const deleteUser = await UserModel.findOneAndDelete({_id:id});
+            return deleteUser
         }
     }
