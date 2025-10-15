@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
     price:{type:String, required:true},
     compareAtPrice:{type:String},
     costPerItem:{type:String},
-    category:{type:mongoose.Types.ObjectId, required:true},
+    category:{type:mongoose.Types.ObjectId, ref:"Categories", required:true},
     brand:{type:String , required:true},
     description:{type:String, required:true},
     stockQuantity:{type:String , required:true, default:0},
