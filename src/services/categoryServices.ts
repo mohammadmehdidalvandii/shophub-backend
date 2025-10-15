@@ -20,5 +20,9 @@ export const categoriesService = {
 
         const categoryDelete =  await CategoriesModel.findOneAndDelete({_id:id});
         return categoryDelete;
+    },
+    async getAllCategory(){
+        const categories = await CategoriesModel.find({});
+        return categories;
     }
 }

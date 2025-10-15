@@ -36,5 +36,21 @@ export const categoryController = {
                 error:error.message,
             })
         }
+    },
+    async getCategories(req:req, res:res){
+        try{
+            const categories = await categoriesService.getAllCategory();
+            return res.status(200).json({
+                message:"Get all Categories successfully",
+                statusCode:200,
+                data:categories,
+            })
+        }catch(error:any){
+            return res.status(500).json({
+                message:"Server Internal Category get",
+                statusCode:500,
+                error:error.message,
+            })
+        }
     }
 }
