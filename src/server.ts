@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import { connectToDB } from "./config/db";
 import AuthRouter from './routes/authRoutes';
 import UserRouter from './routes/userRoutes';
+import CategoriesRouter from './routes/categoryRoutes';
 
 const app = express();
 
@@ -27,6 +28,7 @@ connectToDB()
 // Routers
 app.use('/api/auth', AuthRouter);
 app.use('/api/users', UserRouter);
+app.use('/api/categories', CategoriesRouter);
 
 const PORT = process.env.PORT || 3000;
 
