@@ -11,5 +11,14 @@ export const categoriesService = {
 
         const newCategory = await CategoriesModel.create({title});
         return newCategory
+    },
+    async deleteCategory(id:string){
+        const categoryID = await CategoriesModel.findOne({_id:id});
+        if(!categoryID){
+            throw new Error('Category ID not found ');
+        };
+
+        const categoryDelete =  await CategoriesModel.findOneAndDelete({_id:id});
+        return categoryDelete;
     }
 }
