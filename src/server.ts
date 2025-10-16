@@ -8,10 +8,14 @@ import { connectToDB } from "./config/db";
 import AuthRouter from './routes/authRoutes';
 import UserRouter from './routes/userRoutes';
 import CategoriesRouter from './routes/categoryRoutes';
+import path from "path";
 
 const app = express();
 
 dotenv.config();
+
+// access upload static
+app.use('/uploads', express.static(path.join(__dirname ,'../src/uploads')))
 
 // Middleware 
 app.use(cookieParser());

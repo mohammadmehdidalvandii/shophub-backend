@@ -34,3 +34,6 @@ coverage/
 # Optional: npm package lock (if you want to ignore)
 # package-lock.json
 # yarn.lock
+
+src/uploads/
+
