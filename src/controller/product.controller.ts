@@ -66,5 +66,28 @@ export const productController = {
                 error:error.message
             })
         }
+    },
+    async getProductID(req:req , res:res){
+        try{
+        const {id} = req.params;
+        if(!id){
+            return res.status(400).json({
+                message:"ID is not found",
+                statusCode:400,
+            })
+        }
+        const product = await productServices.getProductById(id);
+        return res.status(200).json({
+            message:"get all Product by ID",
+            statusCode:200,
+            data:product
+        })
+        } catch(error:any){
+            return res.status(500).json({
+                message:"Server Internal error get product by id",
+                statusCode:500,
+                error:error.message,
+            })
+        }
     }
 }

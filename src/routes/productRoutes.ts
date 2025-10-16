@@ -4,6 +4,7 @@ import upload from "../config/multer";
 const router = Router();
 
 router.get('/', productController.getAll);
+router.get('/:id', productController.getProductID);
 router.post('/create', upload.array('images',5), productController.create);
 
 export default router;
