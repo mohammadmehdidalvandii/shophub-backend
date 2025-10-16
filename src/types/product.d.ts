@@ -1,0 +1,22 @@
+export type ProductProps = {
+    productName:string,
+    productSKU:string,
+    price:string,
+    compareAtPrice?:string,
+    costPerItem?:string,
+    category:string,
+    brand:string,
+    description:string,
+    stockQuantity:string,
+    barcode?:string,
+    weight:string,
+    dimensions:{
+        length:string,
+        width:string,
+        height:string,
+    },
+    tags:string[],
+    images:string[],
+    status:'active'|'draft'|'archived',
+    vender:string
+}
