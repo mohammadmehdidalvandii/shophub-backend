@@ -52,5 +52,9 @@ export const productServices = {
        }) ;
 
        return newProduct
+    },
+    async getAllProducts(){
+        const products = await ProductModel.find({}).sort({createdAt:-1}).populate("category","title").lean();
+        return products
     }
 }

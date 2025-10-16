@@ -5,7 +5,7 @@ export const productController = {
     async create(req:req , res:res){
         try{
             const {productName, productSKU , price , compareAtPrice , costPerItem, category ,brand ,description , stockQuantity ,barcode ,weight ,dimensions , length ,width , height ,tags , status , vender} = req.body;
-            
+
             let images:string[] = [];
             if(Array.isArray(req.files)){
                 images = req.files.map((file:Express.Multer.File)=>`/uploads/${file.filename}`);
@@ -48,6 +48,22 @@ export const productController = {
                 message:'Server Internal Error product create',
                 statusCode:500,
                 error:error.message,
+            })
+        }
+    },
+    async getAll(req:req , res:res){
+        try{
+            const products = await productServices.getAllProducts();
+            res.status(200).json({
+                message:"get all products Successfully",
+                statusCode:200,
+                data:products,
+            });
+        }catch(error:any){
+            return res.status(500).json({
+                message:"Server Internal error get all products",
+                statusCode:500,
+                error:error.message
             })
         }
     }
