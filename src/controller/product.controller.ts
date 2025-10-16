@@ -129,5 +129,28 @@ export const productController = {
                 error:error.message
             })
         }
+    },
+    async delete(req:req , res:res){
+        try{
+        const {id} = req.params;
+        if(!id){
+            return res.status(400).json({
+                message:"ID is not found",
+                statusCode:400,
+            })
+        };
+        const deleteProduct = await productServices.deleteProduct(id);
+        res.status(200).json({
+            message:"delete product successfully",
+            statusCode:200,
+            data:deleteProduct,
+        });
+        }catch(error:any){
+             res.status(500).json({
+                message:'Server Internal delete product',
+                statusCode:500,
+                error:error.message
+            })           
+        }
     }
 }

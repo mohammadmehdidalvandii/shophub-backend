@@ -70,5 +70,9 @@ export const productServices = {
     async updateProduct(id:string , data:Partial<{productName:string, price:string, category:string, stockQuantity:string , images:string[]}>){
         const product = await ProductModel.findOneAndUpdate({_id:id},data,{new:true});
         return product
+    },
+    async deleteProduct(id:string){
+        const product = await ProductModel.findOneAndDelete({_id:id});
+        return product
     }
 }

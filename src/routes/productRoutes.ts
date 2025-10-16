@@ -7,5 +7,6 @@ router.get('/', productController.getAll);
 router.get('/:id', productController.getProductID);
 router.post('/create', upload.array('images',5), productController.create);
 router.patch('/:id' , upload.array('images',5) ,  productController.update);
+router.delete('/:id',productController.delete)
 
 export default router;
