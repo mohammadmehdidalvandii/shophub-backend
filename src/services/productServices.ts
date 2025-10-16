@@ -55,10 +55,16 @@ export const productServices = {
     },
     async getAllProducts(){
         const products = await ProductModel.find({}).sort({createdAt:-1}).populate("category","title").lean();
+        if(!products || products.length === 0){
+            throw new Error('No products found')
+        }
         return products
     },
     async getProductById(id:string){
         const product = await ProductModel.findOne({_id:id}).sort({createdAt:-1}).populate('category','title').lean();
+        if(!product){
+            throw new Error('Product not found')
+        }
         return product
     }
 }
