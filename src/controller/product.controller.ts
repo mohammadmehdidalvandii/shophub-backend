@@ -89,5 +89,45 @@ export const productController = {
                 error:error.message,
             })
         }
+    },
+    async update(req:req , res:res){
+        try{
+        const {id} = req.params;
+        if(!id){
+            return res.status(400).json({
+                message:"ID is not found",
+                statusCode:400,
+            })
+        }
+        const updateData:Record<string, any>= {};
+        if(req.files){
+            if(Array.isArray(req.files) && req.files.length > 0){
+                updateData.images = req.files.map((file:Express.Multer.File)=>`http://localhost:3000/uploads/${file.filename}`);
+            }else if(req.file){
+                updateData.images = [`http://localhost:3000/uploads/${req.file.filename}`];
+            }
+        };
+        
+        
+        const allowedFields = ['productName','price','category','stockQuantity','images'];
+        for(const key of allowedFields){
+            if(req.body[key] !== undefined){
+                updateData[key] = req.body[key];
+            }
+        }
+        const product = await productServices.updateProduct(id , updateData);
+        res.status(200).json({
+            message:"product updated successfully",
+            statusCode:200,
+            data:product,
+        })
+
+        }catch(error:any){
+            res.status(500).json({
+                message:'Server Internal update product',
+                statusCode:500,
+                error:error.message
+            })
+        }
     }
 }
