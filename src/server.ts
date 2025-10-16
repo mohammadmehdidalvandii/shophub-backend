@@ -8,11 +8,13 @@ import { connectToDB } from "./config/db";
 import AuthRouter from './routes/authRoutes';
 import UserRouter from './routes/userRoutes';
 import CategoriesRouter from './routes/categoryRoutes';
+import ProductRouter from './routes/productRoutes'
 import path from "path";
 
 const app = express();
 
 dotenv.config();
+console.log("di", path.dirname)
 
 // access upload static
 app.use('/uploads', express.static(path.join(__dirname ,'../src/uploads')))
@@ -33,6 +35,7 @@ connectToDB()
 app.use('/api/auth', AuthRouter);
 app.use('/api/users', UserRouter);
 app.use('/api/categories', CategoriesRouter);
+app.use('/api/products', ProductRouter);
 
 const PORT = process.env.PORT || 3000;
 
