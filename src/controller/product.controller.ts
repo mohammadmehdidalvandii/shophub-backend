@@ -8,7 +8,7 @@ export const productController = {
 
             let images:string[] = [];
             if(Array.isArray(req.files)){
-                images = req.files.map((file:Express.Multer.File)=>`/uploads/${file.filename}`);
+                images = req.files.map((file:Express.Multer.File)=>`http://localhost:3000/uploads/${file.filename}`);
             } else if(req.file){
                 images = [`/uploads/${req.file.filename}`];
             }else{
