@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema({
     description:{type:String, required:true},
     stockQuantity:{type:String , required:true, default:0},
     barcode:{type:String},
+    weight:{type:String, required:true },
     dimensions:{
         length:{
             type:String,
