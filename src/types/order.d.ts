@@ -20,4 +20,4 @@ export type orderProps={
     totalAmount:string,
     status:'pending'|'paid'|'shipped'|'completed'|'cancelled',
     paymentMethod:string,
-},
+}
