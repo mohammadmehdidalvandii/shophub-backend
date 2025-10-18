@@ -64,5 +64,28 @@ export const orderController = {
                 error:error.message
             })
         }
+    },
+    async getOrderId(req:req , res:res){
+        try{
+            const {id} =  req.params;
+            if(!id){
+                res.status(400).json({
+                    message:"ID is not found",
+                    statusCode:400,
+                });
+            };
+            const order = await orderServices.getOrderById(id);
+            res.status(200).json({
+                message:"Get Order by id successfully",
+                statusCode:200,
+                data:order,
+            })
+        }catch(error:any){
+            res.status(500).json({
+                message:"Server Internal get order by id",
+                statusCode:500,
+                error:error.message,
+            })
+        }
     }
 }

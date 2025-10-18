@@ -46,5 +46,9 @@ export const orderServices = {
     async getAllOrders(){
         const orders = await OrderModel.find({}).sort({createdAt:-1}).populate('user','-password').populate('items.product').lean();
         return orders
+    },
+    async getOrderById(id:string){
+        const order = await OrderModel.findOne({_id:id}).populate('user','-password').populate('items.product').lean();
+        return order
     }
 }
