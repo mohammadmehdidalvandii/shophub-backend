@@ -48,5 +48,21 @@ export const orderController = {
                 error:error.message,
             })
         }
+    },
+    async getOrders(req:req, res:res){
+        try{
+            const orders = await orderServices.getAllOrders();
+            res.status(200).json({
+                message:"get all orders successfully",
+                statusCode:200,
+                data:orders
+            })
+        }catch(error:any){
+            res.status(500).json({
+                message:"Server Internal get All Orders",
+                statusCode:500,
+                error:error.message
+            })
+        }
     }
 }

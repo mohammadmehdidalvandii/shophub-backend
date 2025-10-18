@@ -43,4 +43,8 @@ export const orderServices = {
             throw error;
         }
     },
+    async getAllOrders(){
+        const orders = await OrderModel.find({}).sort({createdAt:-1}).populate('user','-password').populate('items.product').lean();
+        return orders
+    }
 }

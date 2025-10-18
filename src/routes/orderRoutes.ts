@@ -5,6 +5,7 @@ import { authenticateToken } from "../middleware/authenticateToken";
 const router = Router();
 
 
+router.get('/' , orderController.getOrders);    
 router.post('/create', authenticateToken,orderController.create);
 
 export default router
