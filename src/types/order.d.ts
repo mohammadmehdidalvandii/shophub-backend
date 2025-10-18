@@ -1,10 +1,10 @@
-export type orderProps={
+export type OrderProps={
     user:string,
-    items:[
-        product:string,
-        quantity:number,
-        price:number,
-    ],
+     items: {
+    product: string;
+    quantity: number;
+    price: number;
+  }[];
     customerInfo:{
         firstName:string,
         lastName:string,
@@ -15,7 +15,7 @@ export type orderProps={
         state:string,
         postalCode:string,
         country:string,
-        orderNote :string,
+        orderNote?:string,
     },
     totalAmount:string,
     status:'pending'|'paid'|'shipped'|'completed'|'cancelled',
