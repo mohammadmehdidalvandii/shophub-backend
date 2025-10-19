@@ -66,7 +66,7 @@ export const authService = {
     }
  },
  async getProfile(id:string){
-    const profile = await UserModel.findOne({_id:id});
+    const profile = await UserModel.findOne({_id:id}).select('-password');
     return profile
  },
 }
