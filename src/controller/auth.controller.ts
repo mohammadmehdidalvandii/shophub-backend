@@ -28,7 +28,7 @@ export const authController = {
             res.cookie('refreshToken',refreshToken,{
                 httpOnly:true,
                 sameSite:'none',
-                secure:true,
+                secure:true, // true for server
                 path:"/",
                 maxAge: 7 * 24 *  60 * 60 * 1000 ,
             });
@@ -90,7 +90,13 @@ export const authController = {
     },
     async logout(req:req , res:res){
         // need addressWeb
-        res.clearCookie('refreshToken');
+        res.clearCookie('refreshToken',{
+                httpOnly:true,
+                sameSite:'none',
+                secure:true, // true for server
+                path:"/",
+                maxAge: 7 * 24 *  60 * 60 * 1000 ,
+        });
         res.json({message:"Logged out  successfully"})
     }
 }
