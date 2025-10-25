@@ -50,5 +50,12 @@ export const orderServices = {
     async getOrderById(id:string){
         const order = await OrderModel.findOne({_id:id}).populate('user','-password').populate('items.product').lean();
         return order
+    },
+    async getOrderByUser (id:string){
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            throw new Error('Invalid user ID');
+        }
+        const orders = await OrderModel.find({user:new mongoose.Types.ObjectId(id)}).sort({createdAt:-1}).populate('items.product').populate('user','-password').lean();
+        return orders
     }
 }

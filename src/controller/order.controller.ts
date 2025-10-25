@@ -87,5 +87,32 @@ export const orderController = {
                 error:error.message,
             })
         }
+    },
+    async getOrderByUserId(req:req , res:res){
+        try{
+            const {id} = req.params;
+            if(!id){
+                res.status(400).json({
+                    message:"ID is not found",
+                    statusCode:400,
+                });
+            };
+
+          
+            const orders = await orderServices.getOrderByUser(id);
+            res.status(200).json({
+                message:"get all user orders",
+                statusCode:200,
+                data:orders
+            })
+
+
+        }catch(error:any){
+            res.status(500).json({
+                message:"Server Internal get order by user id",
+                statusCode:500,
+                error:error.message,
+            })
+        }
     }
 }
