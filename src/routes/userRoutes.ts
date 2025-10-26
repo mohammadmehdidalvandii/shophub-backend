@@ -5,11 +5,11 @@ import { authorizeAdmin } from "../middleware/authorizeAdmin";
 
 const router = Router();
 
-router.use(authenticateToken, authorizeAdmin);
+router.use(authenticateToken);
 
 router.get('/' , userController.getUsers);
 router.get('/:id', userController.userById);
 router.patch('/:id', userController.update);
-router.delete('/:id', userController.delete);
+router.delete('/:id',authorizeAdmin, userController.delete);
 
 export default router
