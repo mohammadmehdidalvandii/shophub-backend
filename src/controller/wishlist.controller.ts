@@ -28,5 +28,30 @@ export const wishlistController = {
                 error:error.message
             })
         }
+    },
+    async getByUser(req:req, res:res){
+        try{
+            const {id} = req.params;
+            if(!id){
+                res.status(400).json({
+                    message:"id is required",
+                    statusCode:400,
+                });
+            };
+            
+            const wishlist = await wishlistServices.getWishlistByUser(id);
+            res.status(200).json({
+                message:"get wishlist by UserId",
+                statusCode:200,
+                data:wishlist,
+            })
+
+        }catch(error:any){
+            res.status(500).json({
+                message:"Server Internal get by user id",
+                statusCode:500,
+                error:error.message,
+            })
+        }
     }
 }
