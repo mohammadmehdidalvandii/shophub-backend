@@ -53,5 +53,28 @@ export const wishlistController = {
                 error:error.message,
             })
         }
+    },
+    async remove(req:req , res:res){
+        try{
+            const {id} = req.params;
+            if(!id){
+                res.status(400).json({
+                    message:"id is required",
+                    statusCode:400,
+                });
+            }; 
+            const rmWishlist = await wishlistServices.removeWishlist(id);
+            res.status(200).json({
+                message:"Removed wishlist",
+                statusCode:200,
+                data:rmWishlist,
+            })
+        }catch(error:any){
+            res.status(500).json({
+                message:"Server Internal removed by id",
+                statusCode:500,
+                error:error.message,
+            })
+        }
     }
 }

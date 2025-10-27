@@ -13,8 +13,11 @@ export const wishlistServices = {
         }
     },
     async getWishlistByUser(userID:string){
-        console.log("user =>",userID)
         const wishlistsUser = await WishListModel.findOne({user:userID}).sort({createdAt:-1}).populate('items.product').populate('user').lean();
         return wishlistsUser
+    },
+    async removeWishlist(id:string){
+        const wishlist = await WishListModel.findOneAndUpdate({_id:id});
+        return wishlist
     }
 }
