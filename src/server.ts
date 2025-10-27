@@ -10,6 +10,7 @@ import UserRouter from './routes/userRoutes';
 import CategoriesRouter from './routes/categoryRoutes';
 import ProductRouter from './routes/productRoutes'
 import OrderRouter from './routes/orderRoutes';
+import WishlistRouter from './routes/wishlistRoutes';
 import path from "path";
 
 const app = express();
@@ -38,6 +39,7 @@ app.use('/api/users', UserRouter);
 app.use('/api/categories', CategoriesRouter);
 app.use('/api/products', ProductRouter);
 app.use('/api/orders' , OrderRouter);
+app.use('/api/wishlist' ,  WishlistRouter);
 
 const PORT = process.env.PORT || 3000;
 
