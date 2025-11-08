@@ -13,7 +13,10 @@ export const wishlistServices = {
         }
     },
     async getWishlistByUser(userID:string){
-        const wishlistsUser = await WishListModel.findOne({user:userID}).sort({createdAt:-1}).populate('items.product').populate('user').lean();
+        const wishlistsUser = await WishListModel.findOne({user:userID}).sort({createdAt:-1}).populate({
+  path: "items.product",
+  populate: { path: "category", model: "Categories" },
+}).populate('user').lean();
         return wishlistsUser
     },
     async removeWishlist(id:string){

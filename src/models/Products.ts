@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import './Categories';
+import CategoriesModel from  './Categories';
 
 const productSchema = new mongoose.Schema({
     productName:{type:String , required:true , trim:true},
@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
     price:{type:String, required:true},
     compareAtPrice:{type:String},
     costPerItem:{type:String},
-    category:{type:mongoose.Types.ObjectId, ref:"Categories", required:true},
+    category:{type:mongoose.Types.ObjectId, ref:CategoriesModel, required:true},
     brand:{type:String , required:true},
     description:{type:String, required:true},
     stockQuantity:{type:String , required:true, default:0},
