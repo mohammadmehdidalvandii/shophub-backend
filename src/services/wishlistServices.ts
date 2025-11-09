@@ -8,8 +8,17 @@ export const wishlistServices = {
                 user:userID,
                 items:[{product:productId}],
             });
-
+            
             return newWishlist;
+        }else{
+            const exists =  wishlist.items.some((item)=>{
+                item.product.toString() === productId
+            })
+            if(!exists){
+                wishlist.items.push({product:productId});
+                await wishlist.save();
+            };
+            return wishlist
         }
     },
     async getWishlistByUser(userID:string){
