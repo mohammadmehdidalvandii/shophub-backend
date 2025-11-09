@@ -25,11 +25,19 @@ export const wishlistServices = {
         const wishlistsUser = await WishListModel.findOne({user:userID}).sort({createdAt:-1}).populate({
   path: "items.product",
   populate: { path: "category", model: "Categories" },
-}).populate('user').lean();
+}).populate('user' ,'-password').lean();
         return wishlistsUser
     },
-    async removeWishlist(id:string){
-        const wishlist = await WishListModel.findOneAndUpdate({_id:id});
-        return wishlist
+    async removeWishlist(itemID:string){
+        const updatedWishlist =  await WishListModel.findOneAndUpdate(
+            {'items._id':itemID},
+            {$pull: {items:{_id:itemID}}},
+            {new:true}
+        ).populate({
+      path: "items.product",
+      populate: { path: "category", model: "Categories" }
+    }).lean();
+
+    return updatedWishlist
     }
 }
