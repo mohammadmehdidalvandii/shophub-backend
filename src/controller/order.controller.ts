@@ -11,29 +11,15 @@ export const orderController = {
                     statusCode:401,
                 });
             };
-            const {product ,quantity , price ,firstName ,lastName , email ,phone ,address , city ,state , postalCode ,country ,totalAmount,paymentMethod ,status} = req.body;
-            const orderData = {
-                user:userID,
-                items:[{
-                    product,
-                    quantity,
-                    price,
-                }],
-                customerInfo:{
-                    firstName,
-                    lastName,   
-                    email,
-                    phone,
-                    address,
-                    city,
-                    state,
-                    postalCode,
-                    country,
-                },
-                totalAmount,
-                paymentMethod,
-                status
-            }
+      const { items, customerInfo, totalAmount, paymentMethod, status } = req.body;
+                const orderData = {
+                    user: userID,
+                    items,
+                    customerInfo,
+                    totalAmount,
+                    paymentMethod,
+                    status: status || "pending",
+                };
             const order = await orderServices.createOrder(orderData , userID);
             res.status(201).json({
                 message:"Order created Successfully",
