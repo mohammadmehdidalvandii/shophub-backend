@@ -123,5 +123,35 @@ export const authController = {
                 error:error.message,
             })
         }
+    },
+    async deleteAccount(req:req , res:res){
+        try{
+            const userID = req.user?._id;
+            if(!userID){
+                return res.status(401).json({
+                    message:"Unauthorized",
+                    statusCode:401,
+                })
+            };
+
+            const result = await authService.deleteAccount(userID);
+            res.clearCookie('refreshToken',{
+                httpOnly:true,
+                sameSite:'none',
+                secure:true, // true for server
+                path:"/",
+                maxAge: 7 * 24 *  60 * 60 * 1000 ,
+             });
+
+            return res.status(200).json({
+                message:"Account Deleted successfully",
+                statusCode:200,
+                data:result,
+            })
+        }catch(error:any){
+            return res.status(500).json({
+                message:'Server Internal Error Delete account'
+            })
+        }
     }
 }

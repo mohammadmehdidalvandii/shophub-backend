@@ -1,4 +1,6 @@
+import OrderModel from "../models/Orders";
 import UserModel from "../models/Users";
+import WishListModel from "../models/Wishlist";
 import { LoginProps, RegisterProps } from "../types/auth";
 import {generateAccessToken , generateRefreshToken , hashedPassword , comparePassword, verifyToken} from '../utils/auth'
 
@@ -88,5 +90,18 @@ export const authService = {
     await  user.save()
 
     return {success:true}
+ },
+ async deleteAccount(userID:string){
+    const user = await UserModel.findOne({_id:userID});
+    if(!user){
+        throw new Error('User not found')
+    };
+
+    await WishListModel.deleteMany({user:userID});
+    await OrderModel.deleteMany({user:userID});
+
+    await UserModel.findOneAndDelete({_id:userID});
+
+    return {success:true};
  }
 }
