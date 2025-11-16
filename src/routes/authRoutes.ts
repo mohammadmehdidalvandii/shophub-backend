@@ -5,6 +5,7 @@ import { validationLogin, validationRegister } from "../validation/Validation.us
 
 const router = Router();
 
+router.put('/change-password',authenticateToken , authController.changePassword);
 router.post('/register', validationRegister ,authController.register);
 router.post('/login', validationLogin ,authController.login);
 router.post('/refresh-token', authController.refreshToken);

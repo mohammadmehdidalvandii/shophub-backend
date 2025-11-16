@@ -69,4 +69,24 @@ export const authService = {
     const profile = await UserModel.findOne({_id:id}).select('-password');
     return profile
  },
+ async changePassword(userID:string , oldPassword:string, newPassword:string){
+    if(!oldPassword || !newPassword){
+        throw new Error('Old and New password are required');
+    };
+    const user = await UserModel.findOne({_id:userID})
+    if(!user){
+        throw new Error('User not found')
+    }
+    const isMatch = await comparePassword(oldPassword , user?.password);
+    if(!isMatch){
+        throw new Error('Old password is incorrect');
+    }
+
+    const hashed = await hashedPassword(newPassword);
+
+    user.password = hashed;
+    await  user.save()
+
+    return {success:true}
+ }
 }

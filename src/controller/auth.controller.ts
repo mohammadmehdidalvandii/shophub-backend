@@ -98,5 +98,30 @@ export const authController = {
                 maxAge: 7 * 24 *  60 * 60 * 1000 ,
         });
         res.json({message:"Logged out  successfully"})
+    },
+    async changePassword(req:req , res:res){
+        try{
+            const userID = req.user?._id
+            console.log("userID", userID)
+            if(!userID){
+                return res.status(401).json({
+                    message:'Unauthorized',
+                    statusCode:401,
+                });
+            }
+            const {oldPassword , newPassword} = req.body;
+            const result = await authService.changePassword(userID , oldPassword , newPassword);
+            res.status(200).json({
+                message:"Password changed successfully",
+                statusCode:200,
+                data:result,
+            });
+        }catch(error:any){
+            return res.status(500).json({
+                message:"Server Internal Error Change password",
+                statusCode:500,
+                error:error.message,
+            })
+        }
     }
 }
