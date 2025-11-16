@@ -11,6 +11,7 @@ import CategoriesRouter from './routes/categoryRoutes';
 import ProductRouter from './routes/productRoutes'
 import OrderRouter from './routes/orderRoutes';
 import WishlistRouter from './routes/wishlistRoutes';
+import MessageRouter from './routes/messageRoutes';
 import path from "path";
 
 const app = express();
@@ -40,6 +41,7 @@ app.use('/api/categories', CategoriesRouter);
 app.use('/api/products', ProductRouter);
 app.use('/api/orders' , OrderRouter);
 app.use('/api/wishlist' ,  WishlistRouter);
+app.use('/api/messages', MessageRouter);
 
 const PORT = process.env.PORT || 3000;
 
