@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors({credentials:true, origin:'http://localhost:3001'}));
+app.use(cors({credentials:true, origin:'https://shop-hub.chbk.app'}));
 
 // Connect to DB
 connectToDB()
