@@ -17,10 +17,11 @@ import path from "path";
 const app = express();
 
 dotenv.config();
-console.log("di", path.dirname)
+
+const uploadsDir = path.join(process.cwd(), "uploads");
 
 // access upload static
-app.use('/uploads', express.static(path.join(__dirname ,'../src/uploads')))
+app.use('/uploads', express.static(uploadsDir))
 
 // Middleware 
 app.use(cookieParser());
