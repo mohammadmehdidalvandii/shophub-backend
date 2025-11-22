@@ -41,8 +41,8 @@ export const authController = {
             
 
             } catch(error:any){
-            res.status(500).json({
-                message:"Sever Internal error",
+            res.status(401).json({
+                message:"Invalid email or password",
                 error:error.message,
                 statusCode:500
             })
