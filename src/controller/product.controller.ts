@@ -8,7 +8,7 @@ export const productController = {
 
             let images:string[] = [];
             if(Array.isArray(req.files)){
-                images = req.files.map((file:Express.Multer.File)=>`https://shophubapi.chbk.app/uploads/${file.filename}`);
+                images = req.files.map((file:Express.Multer.File)=>`https://shophubapi.chbk.dev/uploads/${file.filename}`);
             } else if(req.file){
                 images = [`/uploads/${req.file.filename}`];
             }else{
@@ -102,9 +102,9 @@ export const productController = {
         const updateData:Record<string, any>= {};
         if(req.files){
             if(Array.isArray(req.files) && req.files.length > 0){
-                updateData.images = req.files.map((file:Express.Multer.File)=>`https://shophubapi.chbk.app/uploads/${file.filename}`);
+                updateData.images = req.files.map((file:Express.Multer.File)=>`https://shophubapi.chbk.dev/uploads/${file.filename}`);
             }else if(req.file){
-                updateData.images = [`https://shophubapi.chbk.app/uploads/${req.file.filename}`];
+                updateData.images = [`https://shophubapi.chbk.dev/uploads/${req.file.filename}`];
             }
         };
         
