@@ -30,7 +30,7 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors({credentials:true, origin:'https://shop-hub-frontend-pylv9febn-mohammadmehdidalvandiis-projects.vercel.app/'}));
+app.use(cors({credentials:true, origin:'https://shop-hub-green.vercel.app'}));
 
 // Connect to DB
 connectToDB()
