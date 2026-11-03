@@ -1,5 +1,10 @@
 import { productServices } from "../services/productServices";
+
 import { req, res } from "../types/express";
+
+const getImageUrl = (filename: string) =>
+    `${process.env.BASE_URL?.replace(/\/$/, "") ?? ""}/uploads/${filename}`;
+
 
 export const productController = {
     async create(req:req , res:res){
@@ -8,9 +13,9 @@ export const productController = {
 
             let images:string[] = [];
             if(Array.isArray(req.files)){
-                images = req.files.map((file:Express.Multer.File)=>`https://shophubapi.chbkn.dev/uploads/${file.filename}`);
+                images = req.files.map((file:Express.Multer.File)=>getImageUrl(file.filename));
             } else if(req.file){
-                images = [`/uploads/${req.file.filename}`];
+                images = [getImageUrl(req.file.filename)];
             }else{
                 images = []
             }
@@ -102,9 +107,9 @@ export const productController = {
         const updateData:Record<string, any>= {};
         if(req.files){
             if(Array.isArray(req.files) && req.files.length > 0){
-                updateData.images = req.files.map((file:Express.Multer.File)=>`https://shophubapi.chbkn.dev/uploads/${file.filename}`);
+                updateData.images = req.files.map((file:Express.Multer.File)=>getImageUrl(file.filename));
             }else if(req.file){
-                updateData.images = [`https://shophubapi.chbkn.dev/uploads/${req.file.filename}`];
+                updateData.images = [getImageUrl(req.file.filename)];
             }
         };
         
