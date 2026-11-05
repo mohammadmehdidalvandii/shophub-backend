@@ -30,8 +30,13 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors({credentials:true, origin:'https://shop-hub-green.vercel.app'}));
-
+app.use(cors({
+  credentials: true,
+  origin: [
+    'https://shop-hub-green.vercel.app',
+    'http://localhost:8082',
+  ],
+}));
 // Connect to DB
 connectToDB()
 
